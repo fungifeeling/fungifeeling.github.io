@@ -304,6 +304,8 @@
     lerp: 0.24           // suavizado: más alto = alcanza el objetivo más rápido (antes .14)
   };
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // En mobile el scrub falla (el navegador no decodifica video pausado sin play) -> autoplay en loop
+  var isMobile = window.matchMedia('(max-width: 768px)').matches;
 
   // ---- WhatsApp general (CTA sin producto) ----
   var waGeneral = 'https://wa.me/573107608070?text=' + encodeURIComponent('Hola, quiero pedir mi MagicStick 🍄✨');
@@ -410,7 +412,7 @@
 
   // Setup hero video (scrub o autoplay según flag)
   heroVideo.muted = true;
-  if (!CONFIG.scrubHero || reduceMotion) {
+  if (!CONFIG.scrubHero || reduceMotion || isMobile) {
     heroVideo.loop = true;
     heroVideo.autoplay = true;
     var pp = heroVideo.play(); if (pp && pp.catch) pp.catch(function () {});
@@ -437,7 +439,7 @@
     scrollRaf = requestAnimationFrame(function () {
       scrollRaf = null;
       // Hero scrub: del segundo 4 al segundo 1 con el scroll del primer viewport
-      if (CONFIG.scrubHero && !reduceMotion && heroVideo.duration) {
+      if (CONFIG.scrubHero && !reduceMotion && !isMobile && heroVideo.duration) {
         var hp = Math.min(1, Math.max(0, window.scrollY / (window.innerHeight * HERO.scrollFraction)));
         var start = Math.min(heroVideo.duration - 0.1, HERO.startTime);
         targetTime = start - (start - HERO.endTime) * hp;
@@ -458,7 +460,7 @@
   onScroll();
 
   // ---- Loop rAF: suavizado del scrub del hero (lerp 0.14, umbral 0.035) ----
-  if (CONFIG.scrubHero && !reduceMotion) {
+  if (CONFIG.scrubHero && !reduceMotion && !isMobile) {
     (function tick() {
       if (heroVideo.duration) {
         var diff = targetTime - heroVideo.currentTime;
