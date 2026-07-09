@@ -141,6 +141,15 @@
     .formula__grid{grid-template-columns:1fr;gap:36px}
   }
 
+  /* Hero mobile: video 16:9 completo arriba, texto debajo (el fondo del clip se funde con el de la página) */
+  @media(max-width:768px){
+    .hero{align-items:flex-start}
+    .hero__video{top:70px;bottom:auto;height:calc(100vw * 9 / 16);object-fit:contain;filter:brightness(.95) saturate(1.05)}
+    .hero__ov1{background:linear-gradient(180deg,rgba(13,8,23,0) 55%,rgba(13,8,23,.55) 100%)}
+    .hero__content{padding:calc(70px + 100vw * 9 / 16 + 26px) 6vw 60px;gap:20px}
+    .hero__h1{font-size:clamp(46px,13vw,64px)}
+  }
+
   @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     .beneficios__glow,.particle{animation:none!important}
