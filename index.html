@@ -167,7 +167,13 @@
 
 <!-- ============ HERO ============ -->
 <section id="hero" class="hero">
-  <video id="heroVideo" class="hero__video" src="assets/banner-principal.mp4" muted playsinline preload="auto"></video>
+  <video id="heroVideo" class="hero__video" src="assets/banner-principal.mp4" data-src-mobile="assets/hero-mobile.mp4" muted playsinline preload="auto"></video>
+  <script>
+    (function () {
+      var v = document.getElementById('heroVideo');
+      if (window.matchMedia('(max-width: 768px)').matches) v.src = v.getAttribute('data-src-mobile');
+    })();
+  </script>
   <div class="hero__ov1"></div>
   <div class="hero__ov2"></div>
   <div id="particles" class="hero__particles" aria-hidden="true"></div>
