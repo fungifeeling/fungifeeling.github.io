@@ -79,6 +79,13 @@
   .bcard__word{font-family:'Archivo Black',sans-serif;font-weight:800;font-size:clamp(28px,2.6vw,38px);color:#fff;line-height:1.1}
   .bcard__div{width:44px;height:3px;border-radius:2px;background:linear-gradient(90deg,#f6c453,#b45cf0)}
   .bcard__desc{margin:0;font-size:15.5px;line-height:1.6;color:rgba(243,237,255,.72)}
+  .bcard{cursor:pointer}
+  .bcard__more{max-height:0;overflow:hidden;opacity:0;transition:max-height .5s cubic-bezier(.2,.7,.3,1),opacity .4s}
+  .bcard__more p{margin:0;font-size:14.5px;line-height:1.65;color:rgba(243,237,255,.6);border-top:1px solid rgba(255,255,255,.1);padding-top:14px}
+  .bcard.open .bcard__more{max-height:260px;opacity:1}
+  .bcard__toggle{font-size:13px;font-weight:700;letter-spacing:.06em;color:#f6c453;display:flex;align-items:center;gap:6px;user-select:none}
+  .bcard__toggle span{font-size:16px;line-height:1}
+  .bcard:hover{border-color:rgba(246,196,83,.3)}
 
   /* ---- La Fórmula ---- */
   .formula{background:#080510;padding:130px 6vw}
@@ -351,10 +358,9 @@
 
   // ---- Beneficios ----
   var BENEFITS = [
-    { word: 'Creatividad', desc: 'La mente se abre a lo que antes no veías.' },
-    { word: 'Conexión', desc: 'Con vos mismo, con los demás, con algo más grande.' },
-    { word: 'Claridad', desc: 'El ruido se apaga y lo esencial aparece.' },
-    { word: 'Enfoque', desc: 'Un solo punto de atención, sin fricción.' }
+    { word: 'Creatividad', desc: 'La mente se abre a lo que antes no veías.', more: 'Texto genérico: aquí irá más información sobre este beneficio, cómo se siente y qué lo hace posible. Lo revisamos en detalle después.' },
+    { word: 'Conexión', desc: 'Con vos mismo, con los demás, con algo más grande.', more: 'Texto genérico: aquí irá más información sobre este beneficio, cómo se siente y qué lo hace posible. Lo revisamos en detalle después.' },
+    { word: 'Claridad', desc: 'El ruido se apaga y lo esencial aparece.', more: 'Texto genérico: aquí irá más información sobre este beneficio, cómo se siente y qué lo hace posible. Lo revisamos en detalle después.' }
   ];
   var bGrid = document.getElementById('benefitsGrid');
   var bCards = BENEFITS.map(function (b, i) {
@@ -364,9 +370,21 @@
     card.innerHTML =
       '<div class="bcard__word"></div>' +
       '<div class="bcard__div"></div>' +
-      '<p class="bcard__desc"></p>';
+      '<p class="bcard__desc"></p>' +
+      '<div class="bcard__more"><p></p></div>' +
+      '<div class="bcard__toggle">Ver más <span>+</span></div>';
     card.querySelector('.bcard__word').textContent = b.word;
     card.querySelector('.bcard__desc').textContent = b.desc;
+    card.querySelector('.bcard__more p').textContent = b.more;
+    card.addEventListener('click', function () {
+      var wasOpen = card.classList.contains('open');
+      bCards.forEach(function (c) { c.classList.remove('open'); });
+      if (!wasOpen) card.classList.add('open');
+      card.querySelector('.bcard__toggle span').textContent = wasOpen ? '+' : '−';
+      bCards.forEach(function (c) {
+        if (c !== card) c.querySelector('.bcard__toggle span').textContent = '+';
+      });
+    });
     bGrid.appendChild(card);
     return card;
   });
