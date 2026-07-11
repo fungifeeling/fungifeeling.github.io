@@ -87,6 +87,22 @@
   .bcard__toggle span{font-size:16px;line-height:1}
   .bcard:hover{border-color:rgba(246,196,83,.3)}
 
+  /* ---- Guía de porciones ---- */
+  .dosis{display:flex;flex-direction:column;gap:34px;margin-top:26px}
+  .dosis__bar{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;max-width:640px;width:100%;margin:0 auto}
+  .dosis__sq{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-family:'Archivo Black',sans-serif;font-size:clamp(14px,1.6vw,20px);color:rgba(255,255,255,.55);background:linear-gradient(145deg,#7a4a1f,#5a3413);border-radius:8px;box-shadow:inset 0 2px 4px rgba(255,255,255,.15),inset 0 -3px 5px rgba(0,0,0,.4)}
+  .dosis__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:26px}
+  .dcard{display:flex;flex-direction:column;gap:10px;padding:28px 26px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:20px;border-top:3px solid}
+  .dcard--verde{border-top-color:#7ed087}
+  .dcard--gold{border-top-color:#f6c453}
+  .dcard--rosa{border-top-color:#f07ac0}
+  .dcard__nivel{font-family:'Archivo Black',sans-serif;font-size:19px;color:#fff}
+  .dcard--verde .dcard__nivel{color:#7ed087}
+  .dcard--gold .dcard__nivel{color:#f6c453}
+  .dcard--rosa .dcard__nivel{color:#f07ac0}
+  .dcard__rango{font-weight:800;font-size:15px;color:rgba(243,237,255,.9)}
+  .dcard__desc{margin:0;font-size:14.5px;line-height:1.6;color:rgba(243,237,255,.65)}
+
   /* ---- La Fórmula ---- */
   .formula{background:#080510;padding:130px 6vw}
   .formula__grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
@@ -268,6 +284,33 @@
       <div class="eyebrow eyebrow--gold">Lo que despierta en ti</div>
     </div>
     <div id="benefitsGrid" class="bgrid"></div>
+
+    <!-- Guía de porciones -->
+    <div class="dosis">
+      <div class="head--center">
+        <div class="eyebrow eyebrow--purple">¿Cuánto tomar?</div>
+      </div>
+      <div class="dosis__bar" aria-hidden="true">
+        <div class="dosis__sq">1</div><div class="dosis__sq">2</div><div class="dosis__sq">3</div><div class="dosis__sq">4</div><div class="dosis__sq">5</div><div class="dosis__sq">6</div><div class="dosis__sq">7</div><div class="dosis__sq">8</div>
+      </div>
+      <div class="dosis__grid">
+        <div class="dcard dcard--verde">
+          <div class="dcard__nivel">Principiante</div>
+          <div class="dcard__rango">1 – 2½ cuadritos</div>
+          <p class="dcard__desc">Si es tu primera vez o no visitas frecuentemente "Mundo Mágico", experimenta con una porción pequeña.</p>
+        </div>
+        <div class="dcard dcard--gold">
+          <div class="dcard__nivel">Habitual</div>
+          <div class="dcard__rango">3 – 4 cuadritos</div>
+          <p class="dcard__desc">Si visitas frecuentemente Mundo Mágico, disfruta con una porción moderada.</p>
+        </div>
+        <div class="dcard dcard--rosa">
+          <div class="dcard__nivel">Experto</div>
+          <div class="dcard__rango">6 – 8 cuadritos</div>
+          <p class="dcard__desc">Si eres un viajero experto de Mundo Mágico, aventúrate con una porción grande.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
