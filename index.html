@@ -56,14 +56,6 @@
   .hero__p{margin:0;max-width:520px;font-size:clamp(16px,1.4vw,19px);line-height:1.65;color:rgba(243,237,255,.88)}
   .hero__hint{font-size:12.5px;color:rgba(243,237,255,.45);font-style:italic}
 
-  /* ---- Manifiesto ---- */
-  .manifiesto{position:relative;min-height:170vh;background:#0d0817}
-  .manifiesto__sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
-  .manifiesto__ov{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(139,63,214,.32) 0%,rgba(58,26,102,.25) 45%,#0d0817 88%)}
-  .manifiesto__lines{position:relative;z-index:2;max-width:880px;padding:0 6vw;display:flex;flex-direction:column;gap:26px;text-align:center;transform-origin:center;will-change:transform,opacity}
-  .mline{margin:0;font-family:'Archivo Black',sans-serif;font-weight:700;font-size:clamp(21px,2.4vw,34px);line-height:1.3;color:#fff;transform-origin:center bottom;text-shadow:0 2px 30px rgba(0,0,0,.6);will-change:transform,opacity}
-  .mline--emph{font-weight:800;font-size:clamp(26px,3.2vw,44px);color:#f6c453;text-shadow:0 0 40px rgba(246,196,83,.4)}
-
   /* ---- Beneficios ---- */
   .beneficios{position:relative;background:linear-gradient(180deg,#0d0817 0%,#150d26 50%,#0d0817 100%);padding:130px 6vw;overflow:hidden}
   .beneficios__glow{position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:900px;height:500px;background:radial-gradient(ellipse,rgba(246,196,83,.09),transparent 65%);animation:msGlowPulse 7s ease-in-out infinite;pointer-events:none}
@@ -215,14 +207,6 @@
   </div>
 </section>
 
-<!-- ============ MANIFIESTO ============ -->
-<section id="manifiesto" class="manifiesto">
-  <div class="manifiesto__sticky">
-    <div class="manifiesto__ov"></div>
-    <div id="manifiestoLines" class="manifiesto__lines"></div>
-  </div>
-</section>
-
 <!-- ============ ELIGE TU RITUAL ============ -->
 <section id="ritual" class="ritual">
   <div class="ritual__glow"></div>
@@ -357,24 +341,6 @@
     pWrap.appendChild(frag);
   }
 
-  // ---- Manifiesto: 5 líneas ----
-  var LINES = [
-    'Había una magia que olvidamos cómo ver.',
-    'No desapareció. Solo dejamos de creer en ella.',
-    'MagicStick despierta esa parte de ti que el mundo adulto silenció.',
-    'Cacao ancestral y hongos funcionales, unidos en un solo ritual.',
-    'No es magia de cuento. Es la que siempre estuvo dentro de ti.'
-  ];
-  var N = LINES.length;
-  var mContainer = document.getElementById('manifiestoLines');
-  var mEls = LINES.map(function (text, i) {
-    var p = document.createElement('p');
-    p.className = 'mline' + (i === N - 1 ? ' mline--emph' : '');
-    p.textContent = text;
-    mContainer.appendChild(p);
-    return p;
-  });
-
   // ---- Beneficios ----
   var BENEFITS = [
     { word: 'Creatividad', desc: 'La mente se abre a lo que antes no veías.', more: 'Texto genérico: aquí irá más información sobre este beneficio, cómo se siente y qué lo hace posible. Lo revisamos en detalle después.' },
@@ -442,11 +408,9 @@
   io.observe(bGrid);
   io.observe(lWrap);
 
-  // ---- Hero video scrub + Manifiesto scroll-driven ----
+  // ---- Hero video scrub ----
   var heroVideo = document.getElementById('heroVideo');
-  var manifiestoEl = document.getElementById('manifiesto');
   var targetTime = HERO.startTime;
-  var currentProgress = -1;
   var scrollRaf = null;
 
   // Setup hero video (scrub o autoplay según flag)
@@ -462,14 +426,6 @@
     else heroVideo.addEventListener('loadedmetadata', seek, { once: true });
   }
 
-  function applyManifesto(p) {
-    // Todas las líneas aparecen a la vez, creciendo desde el centro
-    var t = Math.min(1, Math.max(0, p * 1.8));
-    var e = 1 - Math.pow(1 - t, 3);
-    mContainer.style.opacity = (0.03 + e * 0.97);
-    mContainer.style.transform = 'scale(' + (0.45 + e * 0.55) + ')';
-  }
-
   function onScroll() {
     if (scrollRaf) return;
     scrollRaf = requestAnimationFrame(function () {
@@ -480,19 +436,9 @@
         var start = Math.min(heroVideo.duration - 0.1, HERO.startTime);
         targetTime = start - (start - HERO.endTime) * hp;
       }
-      // Manifiesto progress
-      var r = manifiestoEl.getBoundingClientRect();
-      var total = r.height - window.innerHeight;
-      var p = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 1;
-      if (Math.abs(p - currentProgress) > 0.004) {
-        currentProgress = p;
-        applyManifesto(p);
-      }
     });
   }
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', function () { currentProgress = -1; onScroll(); }, { passive: true });
-  applyManifesto(0);
   onScroll();
 
   // ---- Loop rAF: suavizado del scrub del hero (lerp 0.14, umbral 0.035) ----
