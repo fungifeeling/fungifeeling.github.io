@@ -121,6 +121,10 @@
   .pcard__media img{width:100%;height:100%;object-fit:cover}
   .pcard__media img.img--cutout{object-fit:contain;padding:16px}
   .pcard__media--white{background:#fff}
+  .pcard__explica{display:none}
+  @media(max-width:768px){
+    .pcard__explica{display:block;width:100%;height:auto}
+  }
   .pcard__ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.04em;color:rgba(243,237,255,.5);text-align:center;padding:20px}
   .pcard__ph svg{opacity:.55}
   .ph--gold{background:radial-gradient(ellipse at center,rgba(246,196,83,.14),rgba(20,12,38,.6))}
@@ -218,6 +222,7 @@
         <div class="pcard__media pcard__media--white">
           <img class="img--cutout" src="assets/foto-magicstick.webp" alt="MagicStick Grande — chocolatina artesanal con hongos funcionales">
         </div>
+        <img class="pcard__explica" src="assets/explica-magicstick.webp" alt="Magic Stick: barra de chocolate semiamargo o blanco con 3g de magia, dividida en 8 porciones de 375mg. Perfecta para compartir o para ir a tu ritmo." loading="lazy">
         <div class="pcard__body">
           <div class="pcard__top">
             <h3 class="pcard__name">MagicStick Grande</h3>
@@ -236,6 +241,7 @@
         <div class="pcard__media pcard__media--white">
           <img class="img--cutout" src="assets/foto-fingerstick.webp" alt="Finger Stick — chocolatina artesanal con hongos funcionales">
         </div>
+        <img class="pcard__explica" src="assets/explica-fingerstick.webp" alt="Magic Finger personal: la dosis recomendada para una microdosis es de 300mg a 500mg según la contextura del usuario." loading="lazy">
         <div class="pcard__body">
           <div class="pcard__top">
             <h3 class="pcard__name">Finger Stick</h3>
