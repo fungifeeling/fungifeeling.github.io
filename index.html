@@ -116,6 +116,9 @@
   /* ---- Qué puedes experimentar ---- */
   .experiencia{position:relative;background:#0d0817;padding:130px 6vw}
   .exp__sub{text-align:center;margin-top:-12px;font-weight:700;font-size:14px;letter-spacing:.08em;color:#b45cf0}
+  /* Puntos morados sobre Subida (imagen 1), amarillos sobre Bajada (imagen 2) */
+  .experiencia .pslider[data-active="1"] .pslider__dot{background:rgba(246,196,83,.45)}
+  .experiencia .pslider[data-active="1"] .pslider__dot.active{background:#f6c453}
   .pcard__ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.04em;color:rgba(243,237,255,.5);text-align:center;padding:20px}
   .pcard__ph svg{opacity:.55}
   .ph--gold{background:radial-gradient(ellipse at center,rgba(246,196,83,.14),rgba(20,12,38,.6))}
@@ -390,6 +393,7 @@
     if (!track || !dots.length) return;
     function update() {
       var i = Math.round(track.scrollLeft / track.clientWidth);
+      sl.setAttribute('data-active', i);
       dots.forEach(function (d, idx) { d.classList.toggle('active', idx === i); });
     }
     track.addEventListener('scroll', function () { requestAnimationFrame(update); }, { passive: true });
