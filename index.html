@@ -73,9 +73,10 @@
   /* ---- Guía de porciones ---- */
   .dosis{display:flex;flex-direction:column;gap:18px;margin-top:0}
   .dosis__banner{display:block;width:100%;height:auto;border-radius:22px}
-  .dosis__slider,.dosis__dots{display:none}
+  .dosis__slider,.dosis__dots,.dosis__desliza{display:none}
   @media(max-width:768px){
     .dosis__banner{display:none}
+    .dosis__desliza{display:block;text-align:center;margin-top:-6px;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:rgba(243,237,255,.35)}
     .dosis__slider{display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:0;border-radius:24px;scrollbar-width:none}
     .dosis__slider::-webkit-scrollbar{display:none}
     .dosis__slider img{flex:0 0 100%;width:100%;height:auto;scroll-snap-align:center;display:block}
@@ -271,6 +272,7 @@
   <div class="wrap">
     <!-- Guía de porciones -->
     <div class="dosis">
+      <h2 class="ritual__h2">¿Qué tanto deberías <span>comer?</span></h2>
       <img class="dosis__banner" src="assets/guia-banner.webp" alt="Guía de porciones MagicStick: Principiante 1 a 2½ cuadritos, Habitual 3 a 4, Experto 6 a 8">
       <div class="dosis__slider" aria-label="Guía de porciones">
         <img src="assets/guia-1.webp" alt="Principiante: entre 1 y 2½ cuadritos">
@@ -282,6 +284,7 @@
         <button class="dosis__dot" type="button" aria-label="Habitual"></button>
         <button class="dosis__dot" type="button" aria-label="Experto"></button>
       </div>
+      <div class="dosis__desliza">Desliza</div>
       <script>
         (function () {
           var slider = document.querySelector('.dosis__slider');
