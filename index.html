@@ -115,7 +115,14 @@
   .pcard__media img{width:100%;height:100%;object-fit:cover}
   .pcard__media img.img--cutout{object-fit:contain;padding:16px}
   .pcard__media--white{background:#fff}
-  .pcard__explica{display:block;width:100%;height:auto}
+  /* Slider de imágenes dentro de la tarjeta */
+  .pslider{position:relative;width:100%}
+  .pslider__track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .pslider__track::-webkit-scrollbar{display:none}
+  .pslider__track img{flex:0 0 100%;width:100%;height:auto;display:block;scroll-snap-align:center}
+  .pslider__dots{position:absolute;left:0;right:0;bottom:12px;display:flex;justify-content:center;gap:9px}
+  .pslider__dot{width:10px;height:10px;padding:0;border:0;border-radius:50%;background:rgba(139,63,214,.4);box-shadow:0 1px 3px rgba(0,0,0,.35);cursor:pointer;transition:background .3s,transform .3s}
+  .pslider__dot.active{background:#8b3fd6;transform:scale(1.3)}
   .pcard__ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.04em;color:rgba(243,237,255,.5);text-align:center;padding:20px}
   .pcard__ph svg{opacity:.55}
   .ph--gold{background:radial-gradient(ellipse at center,rgba(246,196,83,.14),rgba(20,12,38,.6))}
@@ -221,7 +228,16 @@
     <div class="pgrid">
       <!-- MagicStick Grande -->
       <article class="pcard pcard--gold">
-        <img class="pcard__explica" src="assets/explica-magicstick.webp" alt="Magic Stick: barra de chocolate semiamargo o blanco con 3g de magia, dividida en 8 porciones de 375mg. Perfecta para compartir o para ir a tu ritmo." loading="lazy">
+        <div class="pslider">
+          <div class="pslider__track">
+            <img src="assets/explica-magicstick.webp" alt="Magic Stick: barra de chocolate semiamargo o blanco con 3g de magia, dividida en 8 porciones de 375mg." loading="lazy">
+            <img src="assets/explica-magicstick-2.webp" alt="Magic Stick: 60 gramos de chocolate, 3 gramos de magia fungi." loading="lazy">
+          </div>
+          <div class="pslider__dots" aria-hidden="true">
+            <button class="pslider__dot" type="button" aria-label="Imagen 1"></button>
+            <button class="pslider__dot" type="button" aria-label="Imagen 2"></button>
+          </div>
+        </div>
         <div class="pcard__body">
           <div class="pcard__top">
             <h3 class="pcard__name">MagicStick Grande</h3>
@@ -237,7 +253,16 @@
       </article>
       <!-- Magic Finger -->
       <article class="pcard pcard--purple">
-        <img class="pcard__explica" src="assets/explica-fingerstick.webp" alt="Magic Finger, barrita personal: ideal si es tu primera vez en mundo mágico o si buscas una sensación tranquila." loading="lazy">
+        <div class="pslider">
+          <div class="pslider__track">
+            <img src="assets/explica-fingerstick.webp" alt="Magic Finger, barrita personal: ideal si es tu primera vez en mundo mágico o si buscas una sensación tranquila." loading="lazy">
+            <img src="assets/explica-fingerstick-2.webp" alt="Magic Finger: contiene 15 gramos de chocolate, 500 miligramos de magia fungi." loading="lazy">
+          </div>
+          <div class="pslider__dots" aria-hidden="true">
+            <button class="pslider__dot" type="button" aria-label="Imagen 1"></button>
+            <button class="pslider__dot" type="button" aria-label="Imagen 2"></button>
+          </div>
+        </div>
         <div class="pcard__body">
           <div class="pcard__top">
             <h3 class="pcard__name">Magic Finger</h3>
@@ -357,6 +382,22 @@
     }
     pWrap.appendChild(frag);
   }
+
+  // ---- Sliders de imágenes de producto ----
+  document.querySelectorAll('.pslider').forEach(function (sl) {
+    var track = sl.querySelector('.pslider__track');
+    var dots = sl.querySelectorAll('.pslider__dot');
+    if (!track || !dots.length) return;
+    function update() {
+      var i = Math.round(track.scrollLeft / track.clientWidth);
+      dots.forEach(function (d, idx) { d.classList.toggle('active', idx === i); });
+    }
+    track.addEventListener('scroll', function () { requestAnimationFrame(update); }, { passive: true });
+    dots.forEach(function (d, idx) {
+      d.addEventListener('click', function () { track.scrollTo({ left: idx * track.clientWidth, behavior: 'smooth' }); });
+    });
+    update();
+  });
 
   // ---- La Fórmula: 3 capas ----
   var LAYERS = [
