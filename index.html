@@ -111,6 +111,11 @@
   .pslider__dots{position:absolute;left:0;right:0;bottom:12px;display:flex;justify-content:center;gap:9px}
   .pslider__dot{width:10px;height:10px;padding:0;border:0;border-radius:50%;background:rgba(139,63,214,.4);box-shadow:0 1px 3px rgba(0,0,0,.35);cursor:pointer;transition:background .3s,transform .3s}
   .pslider__dot.active{background:#8b3fd6;transform:scale(1.3)}
+  .pslider--framed{border-radius:24px;overflow:hidden}
+
+  /* ---- Qué puedes experimentar ---- */
+  .experiencia{position:relative;background:#0d0817;padding:130px 6vw}
+  .exp__sub{text-align:center;margin-top:-12px;font-weight:700;font-size:14px;letter-spacing:.08em;color:#b45cf0}
   .pcard__ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.04em;color:rgba(243,237,255,.5);text-align:center;padding:20px}
   .pcard__ph svg{opacity:.55}
   .ph--gold{background:radial-gradient(ellipse at center,rgba(246,196,83,.14),rgba(20,12,38,.6))}
@@ -151,7 +156,7 @@
     .hero__content{padding:24px 6vw 32px;gap:20px}
     .hero__h1{font-size:clamp(46px,13vw,64px)}
     /* Secciones más juntas en mobile */
-    .ritual,.beneficios{padding-top:32px;padding-bottom:32px}
+    .ritual,.beneficios,.experiencia{padding-top:32px;padding-bottom:32px}
     .ritual__wrap{gap:24px}
     .wrap{gap:24px}
     .foot{min-height:auto}
@@ -302,6 +307,25 @@
         })();
       </script>
     </div>
+  </div>
+</section>
+
+<!-- ============ QUÉ PUEDES EXPERIMENTAR ============ -->
+<section id="experiencia" class="experiencia">
+  <div class="wrap">
+    <h2 class="ritual__h2">¿Qué puedes <span>experimentar?</span></h2>
+    <div class="exp__sub">Física y psicológicamente</div>
+    <div class="pslider pslider--framed">
+      <div class="pslider__track">
+        <img src="assets/exp-subida.webp" alt="Subida: posibles síntomas físicos y psíquicos entre los 20 y 90 minutos." loading="lazy">
+        <img src="assets/exp-bajada.webp" alt="Bajada: posibles síntomas físicos y psíquicos entre los 90 y 180 minutos." loading="lazy">
+      </div>
+      <div class="pslider__dots" aria-hidden="true">
+        <button class="pslider__dot" type="button" aria-label="Subida"></button>
+        <button class="pslider__dot" type="button" aria-label="Bajada"></button>
+      </div>
+    </div>
+    <div class="dosis__desliza exp__desliza">Desliza</div>
   </div>
 </section>
 
