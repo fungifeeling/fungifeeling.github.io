@@ -14,7 +14,7 @@
 <script>
 (function () {
   // Fallback si el JSON falla o tarda
-  var FALLBACK = 'https://futurich90.github.io/fungifeeling/';
+  var FALLBACK = 'https://fungifeeling.github.io/';
   // Permite varios QR con un solo archivo: qr/?c=whatsapp usa la clave "whatsapp"
   var key = new URLSearchParams(location.search).get('c') || 'default';
   var timeout = setTimeout(function () { location.replace(FALLBACK); }, 4000);
