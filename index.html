@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
 <title>MagicStick — Vuelve a Creer | Fungi Feeling</title>
 <meta name="description" content="MagicStick: chocolatina artesanal con hongos funcionales de Fungi Feeling. Cacao ancestral y hongos funcionales en un solo ritual. Vuelve a creer.">
 <meta property="og:title" content="MagicStick — Vuelve a Creer">
@@ -14,6 +15,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{box-sizing:border-box}
+  /* Evita que Android/Samsung apliquen su modo oscuro automático y reescriban colores/imágenes */
+  :root{color-scheme:dark}
   html{scroll-behavior:smooth}
   body{margin:0;background:#0d0817;color:#f3edff;font-family:'Manrope',sans-serif;overflow-x:hidden}
   img{max-width:100%}
@@ -34,9 +37,9 @@
 
   /* ---- Buttons ---- */
   .btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-family:'Archivo Black',sans-serif;font-weight:700;border-radius:999px;transition:box-shadow .3s,transform .3s;cursor:pointer;border:0}
-  .btn--gold{background:linear-gradient(135deg,#f6c453,#e8a93a);color:#241238}
+  .btn--gold{background-color:#f6c453;background:linear-gradient(135deg,#f6c453,#e8a93a);color:#241238}
   .btn--gold:hover{box-shadow:0 0 30px 4px rgba(246,196,83,.45);transform:translateY(-1px) scale(1.02)}
-  .btn--purple{background:linear-gradient(135deg,#b45cf0,#8b3fd6);color:#fff;box-shadow:0 8px 32px rgba(139,63,214,.45)}
+  .btn--purple{background-color:#8b3fd6;background:linear-gradient(135deg,#b45cf0,#8b3fd6);color:#fff;box-shadow:0 8px 32px rgba(139,63,214,.45)}
   .btn--purple:hover{box-shadow:0 0 40px 8px rgba(180,92,240,.5);transform:translateY(-2px) scale(1.02)}
   .btn--nav{font-family:'Manrope',sans-serif;font-weight:800;font-size:14.5px;padding:10px 20px}
   .btn--lg{font-size:19px;padding:16px 34px}
@@ -146,14 +149,13 @@
     .formula__grid{grid-template-columns:1fr;gap:36px}
   }
 
-  /* Hero mobile: video 16:9 completo arriba, texto debajo (el fondo del clip se funde con el de la página) */
+  /* Hero mobile: imagen estática completa arriba (en flujo, clickeable) y botón debajo */
   @media(max-width:768px){
-    .hero{min-height:auto}
-    .hero__video{display:none}
-    .hero__img-link{display:block;position:absolute;top:70px;left:0;width:100%;z-index:3;cursor:pointer}
+    .hero{min-height:auto;display:block}
+    .hero__video,.hero__ov1,.hero__ov2{display:none}
+    .hero__img-link{display:block;width:100%;padding-top:70px;cursor:pointer}
     .hero__img{display:block;width:100%;height:auto}
-    .hero__ov1{background:linear-gradient(180deg,rgba(13,8,23,0) 55%,rgba(13,8,23,.55) 100%)}
-    .hero__content{padding:calc(70px + 100vw * 1043 / 1080 + 26px) 6vw 60px;gap:20px}
+    .hero__content{padding:24px 6vw 60px;gap:20px}
     .hero__h1{font-size:clamp(46px,13vw,64px)}
   }
 
