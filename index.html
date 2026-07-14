@@ -71,22 +71,24 @@
   .head--center{display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center}
 
   /* ---- Guía de porciones ---- */
-  .dosis{display:flex;flex-direction:column;gap:30px;margin-top:26px}
+  .dosis{display:flex;flex-direction:column;gap:18px;margin-top:0}
   .dosis__banner{display:block;width:100%;height:auto;border-radius:22px}
-  .dosis__slider,.dosis__hint{display:none}
+  .dosis__slider,.dosis__dots{display:none}
   @media(max-width:768px){
     .dosis__banner{display:none}
     .dosis__slider{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:0;margin:0 -6vw;scrollbar-width:none}
     .dosis__slider::-webkit-scrollbar{display:none}
     .dosis__slider img{flex:0 0 100%;width:100%;height:auto;scroll-snap-align:center;display:block}
-    .dosis__hint{display:block;text-align:center;font-size:12.5px;font-style:italic;color:rgba(243,237,255,.45)}
+    .dosis__dots{display:flex;justify-content:center;gap:9px}
+    .dosis__dot{width:9px;height:9px;padding:0;border:0;border-radius:50%;background:rgba(243,237,255,.25);cursor:pointer;transition:background .3s,transform .3s}
+    .dosis__dot.active{background:#f6c453;transform:scale(1.3)}
   }
 
   /* ---- La Fórmula ---- */
   .formula{background:#080510;padding:130px 6vw}
   .formula__grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
   .formula__col{display:flex;flex-direction:column;gap:20px}
-  .formula__h2{margin:0;font-family:'Archivo Black',sans-serif;font-weight:800;font-size:clamp(36px,4vw,56px);line-height:1.05;color:#fff}
+  .formula__h2{margin:0;font-family:'Archivo Black',sans-serif;font-weight:800;font-size:clamp(36px,4vw,56px);line-height:1.05;color:#fff;text-transform:uppercase}
   .formula__h2 span{color:#f6c453}
   .formula__p{margin:0;font-size:16.5px;line-height:1.7;color:rgba(243,237,255,.75)}
   .layers{display:flex;flex-direction:column;gap:16px}
@@ -101,7 +103,7 @@
   .ritual{position:relative;background:linear-gradient(180deg,#080510 0%,#160d28 60%,#0d0817 100%);padding:130px 6vw;overflow:hidden}
   .ritual__glow{position:absolute;bottom:-250px;left:50%;transform:translateX(-50%);width:1000px;height:600px;background:radial-gradient(ellipse,rgba(180,92,240,.12),transparent 65%);pointer-events:none}
   .ritual__wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:56px;position:relative}
-  .ritual__h2{margin:0;text-align:center;font-family:'Archivo Black',sans-serif;font-weight:800;font-size:clamp(38px,4.5vw,60px);color:#fff}
+  .ritual__h2{margin:0;text-align:center;font-family:'Archivo Black',sans-serif;font-weight:800;font-size:clamp(38px,4.5vw,60px);color:#fff;text-transform:uppercase}
   .ritual__h2 span{color:#f6c453}
   .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px}
   .pcard{display:flex;flex-direction:column;background:rgba(255,255,255,.03);border-radius:24px;overflow:hidden;transition:transform .35s,box-shadow .35s}
@@ -155,8 +157,14 @@
     .hero__video,.hero__ov1,.hero__ov2{display:none}
     .hero__img-link{display:block;width:100%;padding-top:70px;cursor:pointer}
     .hero__img{display:block;width:100%;height:auto}
-    .hero__content{padding:24px 6vw 60px;gap:20px}
+    .hero__content{padding:24px 6vw 32px;gap:20px}
     .hero__h1{font-size:clamp(46px,13vw,64px)}
+    /* Secciones más juntas en mobile */
+    .ritual,.beneficios,.formula{padding-top:32px;padding-bottom:32px}
+    .ritual__wrap{gap:24px}
+    .wrap{gap:24px}
+    .foot{min-height:auto}
+    .foot__content{padding:40px 6vw;gap:20px}
   }
 
   @media(prefers-reduced-motion:reduce){
@@ -268,7 +276,27 @@
         <img src="assets/guia-2.webp" alt="Habitual: entre 3 y 4 cuadritos">
         <img src="assets/guia-3.webp" alt="Experto: entre 6 y 8 cuadritos">
       </div>
-      <div class="dosis__hint">Desliza para ver tu nivel →</div>
+      <div class="dosis__dots" role="tablist" aria-label="Nivel de porción">
+        <button class="dosis__dot" type="button" aria-label="Principiante"></button>
+        <button class="dosis__dot" type="button" aria-label="Habitual"></button>
+        <button class="dosis__dot" type="button" aria-label="Experto"></button>
+      </div>
+      <script>
+        (function () {
+          var slider = document.querySelector('.dosis__slider');
+          var dots = document.querySelectorAll('.dosis__dot');
+          if (!slider || !dots.length) return;
+          function update() {
+            var i = Math.round(slider.scrollLeft / slider.clientWidth);
+            dots.forEach(function (d, idx) { d.classList.toggle('active', idx === i); });
+          }
+          slider.addEventListener('scroll', function () { requestAnimationFrame(update); }, { passive: true });
+          dots.forEach(function (d, idx) {
+            d.addEventListener('click', function () { slider.scrollTo({ left: idx * slider.clientWidth, behavior: 'smooth' }); });
+          });
+          update();
+        })();
+      </script>
     </div>
   </div>
 </section>
