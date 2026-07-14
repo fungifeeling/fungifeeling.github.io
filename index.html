@@ -47,6 +47,7 @@
   .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden}
   .hero__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.75) saturate(1.05)}
   .hero__img{display:none}
+  .hero__img-link{display:none}
   .hero__ov1{position:absolute;inset:0;background:linear-gradient(100deg,rgba(13,8,23,.88) 0%,rgba(13,8,23,.55) 42%,rgba(13,8,23,.15) 70%,rgba(13,8,23,.55) 100%)}
   .hero__ov2{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 70%,rgba(246,196,83,.10),transparent 55%)}
   .hero__particles{position:absolute;inset:0;pointer-events:none}
@@ -149,7 +150,8 @@
   @media(max-width:768px){
     .hero{min-height:auto}
     .hero__video{display:none}
-    .hero__img{display:block;position:absolute;top:70px;left:0;width:100%;height:auto}
+    .hero__img-link{display:block;position:absolute;top:70px;left:0;width:100%;z-index:3;cursor:pointer}
+    .hero__img{display:block;width:100%;height:auto}
     .hero__ov1{background:linear-gradient(180deg,rgba(13,8,23,0) 55%,rgba(13,8,23,.55) 100%)}
     .hero__content{padding:calc(70px + 100vw * 1043 / 1080 + 26px) 6vw 60px;gap:20px}
     .hero__h1{font-size:clamp(46px,13vw,64px)}
@@ -169,7 +171,7 @@
     <img src="assets/logo-fungifeel.png" alt="Fungi Feeling">
   </a>
   <div class="nav__menu">
-    <a href="#ritual" class="nav__link nav__link--collapsible">Elige tu ritual</a>
+    <a href="#productos" class="nav__link nav__link--collapsible">Productos Mágicos</a>
     <a href="#proceso" class="nav__link nav__link--collapsible">El Proceso</a>
     <a class="btn btn--gold btn--nav" data-wa-general target="_blank" rel="noopener" href="#">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="#241238" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.4-.7-2.9-1.1-4.7-4-4.8-4.2-.2-.2-1.2-1.5-1.2-2.9s.7-2 1-2.3c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.4l.9 2.1c0 .2.1.4 0 .6l-.4.6-.4.4c-.2.2-.3.4-.1.7.1.3.7 1.2 1.5 1.9 1.1.9 1.9 1.2 2.2 1.4.3.1.5.1.6-.1l1-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .6-.2 1z"></path></svg>
@@ -181,7 +183,7 @@
 <!-- ============ HERO ============ -->
 <section id="hero" class="hero">
   <video id="heroVideo" class="hero__video" data-src="assets/banner-principal.mp4" muted playsinline preload="none"></video>
-  <img class="hero__img" src="assets/hero-mobile.webp" alt="Fungi Feeling — Dulcería Mágica">
+  <a class="hero__img-link" href="#productos" aria-label="Ver productos mágicos"><img class="hero__img" src="assets/hero-mobile.webp" alt="Fungi Feeling — Dulcería Mágica"></a>
   <script>
     (function () {
       // El video del hero solo se carga en desktop; en mobile va imagen estática
@@ -204,11 +206,11 @@
   </div>
 </section>
 
-<!-- ============ ELIGE TU RITUAL ============ -->
-<section id="ritual" class="ritual">
+<!-- ============ PRODUCTOS MÁGICOS ============ -->
+<section id="productos" class="ritual">
   <div class="ritual__glow"></div>
   <div class="ritual__wrap">
-    <h2 class="ritual__h2">Elige tu <span>ritual</span></h2>
+    <h2 class="ritual__h2">Productos <span>Mágicos</span></h2>
     <div class="pgrid">
       <!-- MagicStick Grande -->
       <article class="pcard pcard--gold">
